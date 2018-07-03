@@ -1,0 +1,9 @@
+Install PIL for python3:
+
+- find the right version (1.1.7 for python3)
+- install zlib and jpeglib6.2b or 8b
+
+
+Install pydlnadms
+- copy pydlnadmsd to /etc/init.d and adapt path
+- open ports 1337 and 2337 in udp and tcp in firewall 

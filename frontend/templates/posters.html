@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% block title %}Poster list {% endblock title %}
+
+{% block body %}
+
+	{% if posterList %}
+		<table class="table">
+			<tr>
+				<th width="100px">Poster</th>
+				<th width="300px">Name</th>
+				<th width="50px">Year</th>
+				<th width="250px">Casting</th>
+				<th width="500px">Description</th>
+				<th />
+				<th />
+			</tr>
+			{% for poster in posterList %}
+				<tr>
+					<td>
+					{% if poster.thumbnail %}
+						<img src="{% url 'dataFile' poster.thumbnail %}" alt="thumbnail"/>
+					{% endif %}
+					</td>
+					<td>{{ poster.title }}</td>
+					<td>{{ poster.productionYear }}</td>
+					<td>{{ poster.casting }}</td>
+					<td>{{ poster.description }}</td>
+					<td>
+						<form name="choose{{ poster.info_id }}" action="{% url 'selectInfo' %}" method="post">
+							{% csrf_token %}
+							<input type="hidden" name="infoId" value="{{ poster.info_id }}">
+							<input type="hidden" name="fileId" value="{{ fileId }}">
+							<input type="hidden" name="parentPath" value="{{ parentPath }}">
+							<input type="submit" value="select info">
+						</form>
+					</td>
+					<td>
+						<form name="delete{{ poster.info_id }}" action="{% url 'deleteInfo' %}" method="post">
+							{% csrf_token %}
+							<input type="hidden" name="infoId" value="{{ poster.info_id }}">
+							<input type="hidden" name="fileId" value="{{ fileId }}">
+							<input type="hidden" name="parentPath" value="{{ parentPath }}">
+							<input type="submit" value="delete">
+						</form>
+					</td>
+					
+				</tr>
+			{% endfor %}
+			
+			
+		</table>
+		
+		<form action="{% url 'markFileComplete' %}" method="post">
+		{% csrf_token %}
+			<input type="hidden" name="fileId" value="{{ fileId }}">
+			<input type="hidden" name="parentPath" value="{{ parentPath }}">
+			<input type="submit" value="done">
+		</form>
+	
+	{% else %}
+		No posters to display
+	{% endif %}
+
+{% endblock %}

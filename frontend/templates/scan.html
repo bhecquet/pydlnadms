@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block javascript %}
+	<script type="text/javascript" src="/pydlnadms_frontend/static/js/scan.js"></script>
+{% endblock javascript %}
+
+{% block title %}Scanned files {% endblock title %}
+
+{% block body %}
+
+<div id="scanTable">
+
+	{% for movie in moviesAlreadyScanned %}
+		<div class="row">
+			<span class="titleColumn" id="{{ movie.file_id }}">
+				<a href="{% url 'posters' movie.file_id %}">{{ movie.path }}</a> 
+			</span>
+			<span id="state{{ movie.file_id }}"></span>
+		</div>
+	
+	{% endfor %}
+
+	{% for movie in moviesToScan %}
+		<div class="row">
+			<span class="titleColumn" id="{{ movie.file_id }}">{{ movie.path }} </span>
+			<span id="state{{ movie.file_id }}"></span>
+		</div>
+	{% endfor %}
+</div>
+
+{% endblock %}

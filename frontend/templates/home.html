@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}Dnla home {% endblock title %}
+
+{% block body %}
+
+	<div id="rootFolders">
+		<div>Root folders</div>
+	{% for root in rootFolders %}
+		<a href="{% url 'filesDisplay' %}?path={{ root }}">{{ root }}</a><br>
+	{% endfor %}
+	</div>
+	<br />
+	{% if moviesToCheck %}
+		<div id="moviesToCheck">
+			<div>Check movie posters</div>
+				{% for movie in moviesToCheck %}
+					<div class="movie"><a href="{% url 'posters' movie.file_id %}">{{ movie.path }}</a></div>
+				{% endfor %}
+		</div>
+	{% endif %}
+	
+	<br>
+	<div>
+		<a href="{% url 'scan' %}">Scan</a>
+	</div>
+
+{% endblock body %}
+

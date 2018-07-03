@@ -1,0 +1,14 @@
+- install apache
+- install mod_wsgi
+- copy pydlnadms_frontend.conf to /etc/apache2/site-available and link it to /etc/apache2/site-enable 
+- modify paths contained in pydlnadms_frontend.conf to match the real paths of the application (installation path and 
+  data file paths)
+- in settings.py, change the HOME_DIR value to the home where pydlnadms will write its database file
+- make ~/.pydlnadms and ~/.pydlnadms/pydlnadms.db directory writable by apache process
+- add apache to mythtv group so that it can delete files created by pydlnadms
+- install django, libjpeg, zlib and Pillow
+
+Create file file_conf.py under ~/.pydlnadms folder and add the following:
+folders = [<folder1>, <folder2>]
+mergedFolders = {'merged1': [<folder1>, <folder2>]}
+
