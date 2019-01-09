@@ -1,4 +1,8 @@
+-g
+
+
 - install apache
+- install ttf-bitstream-vera
 - install mod_wsgi
 - copy pydlnadms_frontend.conf to /etc/apache2/site-available and link it to /etc/apache2/site-enable 
 - modify paths contained in pydlnadms_frontend.conf to match the real paths of the application (installation path and 
@@ -11,4 +15,8 @@
 Create file file_conf.py under ~/.pydlnadms folder and add the following:
 folders = [<folder1>, <folder2>]
 mergedFolders = {'merged1': [<folder1>, <folder2>]}
+
+Create file pydlnadms.cfg under ~/.pydlnadms folder and add the following:
+[General]
+ffmpeg.directory=<path.to.ffmpeg>
 

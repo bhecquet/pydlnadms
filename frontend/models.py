@@ -6,10 +6,6 @@ Created on 7 juil. 2012
 
 from django.db import models
 
-
-class Category(models.Model):
-    name = models.CharField(max_length=30)
-
 class Folders(models.Model):
     
     class Meta:
@@ -31,9 +27,13 @@ class Files(models.Model):
     deletable = models.IntegerField() # date at which file has been marked as deletable in epoch format
     newfile = models.BooleanField() 
     searchDone = models.IntegerField() # date at which a scan has been done on this file in epoch format
-    category = models.ManyToManyField(Category)
+    virtualPath = models.CharField(max_length=255, null=True) # path to which this file should be presented. Allow to classify files and group them
     
+
 class File_infos(models.Model):
+    """    
+    Technical information about the file
+    """
     
     class Meta:
         db_table = 'file_infos'

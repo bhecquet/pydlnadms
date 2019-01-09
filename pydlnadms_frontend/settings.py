@@ -35,7 +35,7 @@ except:
 HOME_DLNA_DIR = HOME_DIR + '.pydlnadms' + os.sep
 DLNA_DATA_DIR = HOME_DLNA_DIR + 'data' + os.sep
 
-TEMPLATE_DIRS = [os.path.join(BASE_DIR, 'frontend', 'templates')]
+
 
 # Application definition
 
@@ -46,10 +46,11 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'frontend'
+    'frontend.app.FrontendConfig'
 )
 
 MIDDLEWARE_CLASSES = (
+    'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -62,6 +63,21 @@ ROOT_URLCONF = 'pydlnadms_frontend.urls'
 
 WSGI_APPLICATION = 'pydlnadms_frontend.wsgi.application'
 
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                'django.template.context_processors.debug',
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
+            ],
+        },
+    },
+]
 
 # Database
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases

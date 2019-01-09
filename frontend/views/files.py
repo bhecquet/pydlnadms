@@ -1,13 +1,15 @@
 
-from django.shortcuts import render_to_response, redirect
-from django.conf import settings
-
 import os
-from frontend.controller.files import getDirectChildren,\
-    getParentFolder, getFilesInFolder, getRootFolders, getMoviesToCheck,\
-    getPosterList, deleteFileInfos, markFileAsComplete, deleteOtherFileInfos
 from urllib.parse import urlparse
+
+from django.conf import settings
+from django.shortcuts import render_to_response, redirect
 from django.template.context_processors import csrf
+
+from frontend.controller.files import getDirectChildren, \
+    getParentFolder, getFilesInFolder, getRootFolders, getMoviesToCheck, \
+    getPosterList, deleteFileInfos, markFileAsComplete, deleteOtherFileInfos
+from frontend.models import Files
 
 
 def filesDisplay(request):
@@ -36,7 +38,7 @@ def posters(request, fileid=0):
     posterList = getPosterList(fileid)
     
     params = {'posterList': posterList,
-               'fileId': fileid,
+               'file': Files.objects.get(file_id=fileid),
                'parentPath': parentPath}
     params.update(csrf(request))
     
@@ -55,8 +57,13 @@ def selectFileInfo(request):
 def markFileComplete(request):
     fileId = int(request.POST['fileId'])
     parentPath = request.POST['parentPath']
+    virtualPath = request.POST['virtualPath']
     
     markFileAsComplete(fileId)
+    
+    fileM = Files.objects.get(file_id=fileId)
+    fileM.virtualPath = virtualPath
+    fileM.save()
     
     return redirect(parentPath)
     

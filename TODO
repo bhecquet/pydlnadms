@@ -3,3 +3,8 @@
 - quand on vient de scanner, il faut laisser la possibilité de consulter la liste des fichier fraichement scannés.
 - Il doit être possible de modifier le texte de recherche pour un scan
 - modifier l'apparence des résultats
+- user defined Virtual Path:
+	- input field should propose existing virtual path => use bootstrap for example
+	- virtual path should be checked => must begin with a "/"
+	- when building tree on backend, virtual path should be taken into account
+	- on frontend, virtual path should also be taken into account

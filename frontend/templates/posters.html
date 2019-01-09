@@ -29,7 +29,7 @@
 						<form name="choose{{ poster.info_id }}" action="{% url 'selectInfo' %}" method="post">
 							{% csrf_token %}
 							<input type="hidden" name="infoId" value="{{ poster.info_id }}">
-							<input type="hidden" name="fileId" value="{{ fileId }}">
+							<input type="hidden" name="fileId" value="{{ file.file_id }}">
 							<input type="hidden" name="parentPath" value="{{ parentPath }}">
 							<input type="submit" value="select info">
 						</form>
@@ -38,7 +38,7 @@
 						<form name="delete{{ poster.info_id }}" action="{% url 'deleteInfo' %}" method="post">
 							{% csrf_token %}
 							<input type="hidden" name="infoId" value="{{ poster.info_id }}">
-							<input type="hidden" name="fileId" value="{{ fileId }}">
+							<input type="hidden" name="fileId" value="{{ file.file_id }}">
 							<input type="hidden" name="parentPath" value="{{ parentPath }}">
 							<input type="submit" value="delete">
 						</form>
@@ -52,7 +52,8 @@
 		
 		<form action="{% url 'markFileComplete' %}" method="post">
 		{% csrf_token %}
-			<input type="hidden" name="fileId" value="{{ fileId }}">
+			Presentation path: <input type="text" name="virtualPath" value="{{ file.virtualPath }}" />
+			<input type="hidden" name="fileId" value="{{ file.file_id }}">
 			<input type="hidden" name="parentPath" value="{{ parentPath }}">
 			<input type="submit" value="done">
 		</form>
