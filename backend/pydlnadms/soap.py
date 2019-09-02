@@ -24,8 +24,7 @@ def get_soap_request_args(raw_xml, service_type, action):
 
 SOAPRequestHeader = collections.namedtuple(
     'SOAPRequestHeader',
-    'service_type action content_length',
-    verbose=False)
+    'service_type action content_length')
 
 def get_soap_request(http_request):
     soapact = http_request['soapaction']
