@@ -1,10 +1,10 @@
-from django.shortcuts import render_to_response
+from django.shortcuts import render
 from frontend.controller.scan import getMoviesToScan,\
     getRecentlyScannedMovies, updateSearchDone
 from django.http import HttpResponse
 
 def scanMovies(request):
-    return render_to_response('scan.html', {'moviesToScan': getMoviesToScan(),
+    return render(request, 'scan.html', {'moviesToScan': getMoviesToScan(),
                                             'moviesAlreadyScanned': getRecentlyScannedMovies()})
 
 def updateScannedMovie(request):

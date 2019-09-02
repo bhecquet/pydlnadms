@@ -3,7 +3,7 @@ import os
 from urllib.parse import urlparse
 
 from django.conf import settings
-from django.shortcuts import render_to_response, redirect
+from django.shortcuts import render, redirect
 from django.template.context_processors import csrf
 
 from frontend.controller.files import getDirectChildren, \
@@ -18,12 +18,12 @@ def filesDisplay(request):
     if sourceFolder.endswith('/'):
         sourceFolder = sourceFolder[:-1]
  
-    return render_to_response('fileList.html', {'fileList': getFilesInFolder(sourceFolder),
+    return render(request, 'fileList.html', {'fileList': getFilesInFolder(sourceFolder),
                                                 'parentFolder': getParentFolder(sourceFolder),
                                                 'childFolders': getDirectChildren(sourceFolder)})
     
 def displayHome(request):
-    return render_to_response('home.html', {'rootFolders': getRootFolders(),
+    return render(request, 'home.html', {'rootFolders': getRootFolders(),
                                             'moviesToCheck': getMoviesToCheck()})
     
 def posters(request, fileid=0):
@@ -42,7 +42,7 @@ def posters(request, fileid=0):
                'parentPath': parentPath}
     params.update(csrf(request))
     
-    return render_to_response('posters.html', params)
+    return render(request, 'posters.html', params)
 
 def deleteFileInfo(request):
     infoId = int(request.POST['infoId'])
@@ -57,7 +57,7 @@ def selectFileInfo(request):
 def markFileComplete(request):
     fileId = int(request.POST['fileId'])
     parentPath = request.POST['parentPath']
-    virtualPath = request.POST['virtualPath']
+    virtualPath = request.POST.get('virtualPath')
     
     markFileAsComplete(fileId)
     

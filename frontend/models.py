@@ -20,8 +20,8 @@ class Files(models.Model):
         db_table = 'files'
     
     file_id = models.IntegerField(primary_key=True)
-    display_folder = models.ForeignKey(Folders, related_name='display_folder_id')
-    location_folder = models.ForeignKey(Folders, related_name='location_folder_id')
+    display_folder = models.ForeignKey(Folders, related_name='display_folder_id', on_delete=models.CASCADE)
+    location_folder = models.ForeignKey(Folders, related_name='location_folder_id', on_delete=models.CASCADE)
     path = models.CharField(max_length=200) 
     mimetype = models.CharField(max_length=60) 
     deletable = models.IntegerField() # date at which file has been marked as deletable in epoch format
@@ -39,7 +39,7 @@ class File_infos(models.Model):
         db_table = 'file_infos'
         
     file_info_id = models.IntegerField(primary_key=True) 
-    file = models.ForeignKey(Files)
+    file = models.ForeignKey(Files, on_delete=models.CASCADE)
     info = models.CharField(max_length=100)
     value = models.CharField(max_length=100)
     
@@ -49,7 +49,7 @@ class Movie_infos(models.Model):
         db_table = 'movie_infos'
     
     info_id = models.IntegerField(primary_key=True)
-    file = models.ForeignKey(Files)
+    file = models.ForeignKey(Files, on_delete=models.CASCADE)
     title = models.CharField(max_length=100)
     casting = models.CharField(max_length=100)
     productionYear = models.CharField(max_length=4)

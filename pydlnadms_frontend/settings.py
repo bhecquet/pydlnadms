@@ -22,8 +22,6 @@ SECRET_KEY = 'u#k#7s21y$911n*rht1pw1)l*4yl^u%g&tlgkpom#9-l5!&bhz'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-TEMPLATE_DEBUG = True
-
 ALLOWED_HOSTS = []
 
 try:
@@ -49,7 +47,7 @@ INSTALLED_APPS = (
     'frontend.app.FrontendConfig'
 )
 
-MIDDLEWARE_CLASSES = (
+MIDDLEWARE = (
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',

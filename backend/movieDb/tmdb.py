@@ -125,11 +125,13 @@ class Movies(Core):
         title = self.escape(title)
         self.movies = self.getJSON(config['urls']['movie.search'] % (title,str(1)), language=language)
 
-        pages = self.movies["total_pages"]
+        pages = self.movies.get("total_pages", 0)
         if not self.limit:
             if int(pages) > 1:                  #
                 for i in range(2,int(pages)+1): #  Thanks @tBuLi
-                    self.movies["results"].extend(self.getJSON(config['urls']['movie.search'] % (title,str(i)), language=language)["results"])
+                    otherResults = self.getJSON(config['urls']['movie.search'] % (title,str(i)), language=language)
+                    if 'results' in otherResults:
+                        self.movies["results"].extend(otherResults["results"])
 
     def __iter__(self):
         for i in self.movies["results"]:

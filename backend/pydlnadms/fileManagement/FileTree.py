@@ -14,6 +14,9 @@ from backend._misc.mount import MountUtility
 from common.Logger import getLogger
 
 class FileTree(object):
+    """
+    Class for building file / folder tree that will be presented to user
+    """
     
     TREE_BRANCH_ACCESSIBLE = 1
     TREE_BRANCH_NOT_ACCESSIBLE = 2
@@ -117,7 +120,7 @@ class FileTree(object):
                             fileVDir.addFile(VFile('%s %d' % (FileTree.SYNOPSIS_FILE, i), descrFile, fileVDir))
 
                         # 3rd child, the delete option
-                        fileVDir.addDir(VDirectory(FileTree.DELETE_FILE, fileVDir, fileVDir.path + '?%s%d' % (DELETE_PATTERN, fileId)))
+                        #fileVDir.addDir(VDirectory(FileTree.DELETE_FILE, fileVDir, fileVDir.path + '?%s%d' % (DELETE_PATTERN, fileId)))
                         
                         thisDir.addDir(fileVDir)
                     else:
